@@ -18,7 +18,7 @@ body {
     color: #fff;
 }
 
-button{
+button {
     background: none;
     font-family: 'Montserrat', sans-serif;
     color: #fff;
@@ -26,11 +26,12 @@ button{
     font-size: 30px;
 }
 
-button:hover{
+button:hover {
     border-bottom: 1px solid #fff;
 }
 
-.container{
+.container {
+    position: relative;
     width: 800px;
     height: 60vh;
     display: flex;
@@ -39,7 +40,7 @@ button:hover{
     align-items: center;
 }
 
-img{
+img {
     width: 208px;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -50,21 +51,16 @@ img{
     transform: scale(0.9);
 }
 
-.result-text{
+.result-text {
     text-align: center;
     font-size: 40px;
     display: block;
     width: 208px;
 }
 
-.turn-off{
+.turn-off {
     opacity: 0;
-    transition: opacity 0.5s ease-in-out;
-}
-
-.turn-on{
-    opacity: 1;
-    transition: opacity 1s;
+    transition: opacity 0.2s ease-in-out;
 }
 
 .choice-btn:active {
@@ -74,4 +70,84 @@ img{
 .play-again {
     display: none;
     margin-top: 20px;
+}
+
+.slide-user{
+    position: absolute;
+    animation-name: slideUser;
+    animation-duration: 1s;
+    animation-timing-function: linear;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    animation-delay: 0.5s;
+    opacity: 0;
+}
+
+.slide-device{
+    position: absolute;
+    animation-name: slideDevice;
+    animation-duration: 1s;
+    animation-timing-function: linear;
+    animation-iteration-count: 1;
+    animation-delay: 0.5s;
+    animation-fill-mode: forwards;
+    opacity: 0;
+}
+
+.slide-user-paper{
+    position: absolute;
+    animation-name: slideUserPaper;
+    animation-duration: 1s;
+    animation-timing-function: linear;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    opacity: 0;
+}
+
+@keyframes slideUser {
+    0% {
+        right: 0px;
+        opacity: 0;
+    }
+
+    50%{
+        opacity: 0.5;
+    }
+
+    100% {
+        right: 0px;
+        opacity: 1;
+    }
+}
+
+@keyframes slideUserPaper {
+    0% {
+        right: 300px;
+        opacity: 0;
+    }
+
+    50%{
+        opacity: 1;
+    }
+
+    100% {
+        right: 0px;
+        opacity: 1;
+    }
+}
+
+@keyframes slideDevice {
+    0% {
+        left: 0px;
+        opacity: 0;
+    }
+
+    50%{
+        opacity: 0.5;
+    }
+
+    100% {
+        left: 0px;
+        opacity: 1;
+    }
 }

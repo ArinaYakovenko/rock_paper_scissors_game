@@ -1,9 +1,8 @@
 let player;
 let computer;
 let result;
-console.log(result);
-
-let clonedImage;
+let linkImg;
+let computerImg;
 
 const choiceBtns = document.querySelectorAll('.choice-btn');
 const container = document.querySelector('.container');
@@ -12,7 +11,10 @@ const playAgainButton = document.querySelector('.play-again');
 
 choiceBtns.forEach(button => button.addEventListener('click', () => {
         player = button.alt;
-        deleteOtherBtns();
+        if(button.alt === 'paper'){
+            button.classList.add('slide-user-paper')
+        }
+        hideOtherBtns();
         computerTurn();
 }));
 
@@ -21,23 +23,19 @@ playAgainButton.addEventListener('click', () => {
     resultText.textContent = 'Make your choice';
     playAgainButton.style.display = 'none';
     choiceBtns.forEach(button => {
-        button.style.display = 'block';
-        button.classList.remove('turn-on', 'turn-off', 'correct', 'incorrect');
+        button.classList.remove('turn-off', 'slide-user', 'slide-user-paper', 'slide-device' );
     });
     
-    if (clonedImage) {
-        clonedImage.remove();
-        clonedImage = null;
+    if (computerImg) {
+        computerImg.remove();
+        computerImg = null;
     }
 });
 
-function deleteOtherBtns() {
+function hideOtherBtns() {
     choiceBtns.forEach(button => {
         if (button.alt !== player) {
             button.classList.add('turn-off');
-            button.addEventListener('transitionend', () => {
-                button.style.display = 'none';
-            });
         }
     });
 }
@@ -48,28 +46,26 @@ function computerTurn() {
     switch (randomNum) {
         case 1:
             computer = 'rock';
+            linkImg = './img/rock.png'
             break;
         case 2:
             computer = 'paper';
+            linkImg = './img/paper.png'
             break;
         case 3:
             computer = 'scissors';
+            linkImg = './img/scissors.png'
             break;
     }
 
-    choiceBtns.forEach(button => {
-        if (button.alt === computer) {
-            button.classList.add('turn-on');
-            button.addEventListener('transitionend', () => {
-                button.style.display = 'block';
-            });
-        }
-        if (player === computer && button.alt === player) {
-            clonedImage = button.cloneNode(true);
-            container.appendChild(clonedImage);
-        }
-    });
-
+    computerImg = document.createElement('img');
+    computerImg.src = linkImg;
+    if(player === 'rock'){
+        computerImg.classList.add('slide-user')
+    } else{
+        computerImg.classList.add('slide-device')
+    }
+    container.appendChild(computerImg);
     checkResult();
 }
 
